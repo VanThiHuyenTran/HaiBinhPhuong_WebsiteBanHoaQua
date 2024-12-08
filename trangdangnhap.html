@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>TraiCayViet - Trang Chủ</title>
+    <link rel="stylesheet" href="dinhdang.CSS">
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            z-index: 1000;
+            width: 60%;
+            height: auto;
+        }
+        .modal.active {
+            display: block;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        .overlay.active {
+            display: block;
+        }
+        .modal button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #3697d4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .modal button:hover {
+            background-color: #3697d4;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>TRÁI CÂY VIỆT</h1>
+        <i style="font-size: 20px;">Trái cây Việt Nam - Tươi ngon - Đa dạng - Giá tốt</i>
+    </header>
+    <nav>
+        <a href="#" onclick="showLoginModal()">Đăng nhập</a>
+        <a href="#" onclick="showRegisterModal()">Đăng ký</a>
+    </nav>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="modal" id="loginModal">
+        <h2>Đăng nhập</h2>
+        <form>
+            <label for="loginEmail">Email/SĐT:</label><br>
+            <input type="text" id="loginEmail" name="loginEmail"><br><br>
+            <label for="loginPassword">Mật khẩu:</label><br>
+            <input type="password" id="loginPassword" name="loginPassword"><br><br>
+            <button type="submit">Đăng nhập</button>
+        </form>
+    </div>
+
+    <div class="modal" id="registerModal">
+        <h2>Đăng ký</h2>
+        <form>
+            <label for="registerType">Bạn muốn:</label><br>
+            <select id="registerType" name="registerType">
+                <option value="buyer">Mua hàng</option>
+                <option value="seller">Bán hàng</option>
+            </select><br><br>
+            <label for="registerName">Họ và tên:</label><br>
+            <input type="text" id="registerName" name="registerName"><br><br>
+            <label for="registerPhone">SĐT:</label><br>
+            <input type="text" id="registerPhone" name="registerPhone"><br><br>
+            <label for="registerEmail">Email:</label><br>
+            <input type="email" id="registerEmail" name="registerEmail"><br><br>
+            <label for="registerPassword">Mật khẩu:</label><br>
+            <input type="password" id="registerPassword" name="registerPassword"><br><br>
+            <label for="registerConfirmPassword">Nhập lại mật khẩu:</label><br>
+            <input type="password" id="registerConfirmPassword" name="registerConfirmPassword"><br><br>
+            <button type="submit">Đăng ký</button>
+        </form>
+    </div>
+
+    <footer>
+        @Trái cây Việt
+    </footer>
+
+    <script>
+        function showLoginModal() {
+            document.getElementById('loginModal').classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+        }
+
+        function showRegisterModal() {
+            document.getElementById('registerModal').classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+        }
+
+        function closeModal() {
+            document.querySelectorAll('.modal').forEach(modal => modal.classList.remove('active'));
+            document.getElementById('overlay').classList.remove('active');
+        }
+
+        document.getElementById('overlay').addEventListener('click', closeModal);
+    </script>
+</body>
+</html>
