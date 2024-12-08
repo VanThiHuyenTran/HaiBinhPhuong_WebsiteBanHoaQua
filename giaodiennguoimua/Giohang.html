@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8">
+        <title>traicayviet_Giohang</title>
+        <link rel="stylesheet" href="dinhdang.CSS">
+        <style>
+            .container {
+                width: 80%;
+                margin: 20px auto;
+                background-color: white;
+                border-radius: 8px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 15px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+            .product-img {
+                width: 50px;
+                height: 50px;
+                object-fit: cover;
+                border-radius: 5px;
+            }
+            .quantity {
+                width: 50px;
+                padding: 5px;
+                text-align: center;
+            }
+            .total-price {
+                font-size: 18px;
+                font-weight: bold;
+            }
+            .checkout {
+                color: white;
+                background-color: rgb(252, 138, 138);
+                padding: 15px;
+                font-size: 18px;
+                border: none;
+                cursor: pointer;
+                text-align: center;
+                display: block;
+                width: 100%;
+                border-radius: 5px;
+                margin-top: 20px;
+            }
+            .checkout-form {
+                display: none;
+                width: 80%;
+                margin: 20px auto;
+                background-color: white;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+            .checkout-form input {
+                width: 100%;
+                margin: 10px 0;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+            .checkout-form button {
+                width: 100%;
+                padding: 15px;
+                font-size: 18px;
+                border: none;
+                border-radius: 5px;
+                background-color: rgb(252, 138, 138);
+                color: white;
+                cursor: pointer;
+            }
+        </style>
+        <script>
+            function checkout() {
+                document.querySelector(".checkout-form").style.display = "block";
+            }
+            function placeOrder() {
+                alert("Đơn hàng của bạn đã được đặt thành công!");
+            }
+        </script>
+    </head>
+    <body>
+        <header>
+            <h1>TRÁI CÂY VIỆT</h1>
+            <i style="font-size: 20px;">Trái cây Việt Nam - Tươi ngon - Đa dạng - Giá tốt</i>
+        </header>
+        <div>
+            <input type="text" name="Tìm kiếm" placeholder="Tìm kiếm" style="width: 80%; padding: 10px; border: 1px solid #ccc; border-radius: 10px;">
+            <a style="background-color: #ff9191; color: white; border-radius: 10px;" href="#">Tìm kiếm</a>
+        </div>
+        <nav>
+            <a href="Trangchu.html">Trang chủ</a>
+            <a href="Sanpham.html">Sản phẩm</a>
+            <a href="Giohang.html">Giỏ hàng</a>
+            <a href="Donhang.html">Đơn hàng</a>
+            <a href="Lienhe.html">Liên hệ</a>
+        </nav>
+        <div class="container">
+            <table id="cartTable">
+                <thead>
+                    <tr>
+                        <th>Hình ảnh</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Giá</th>
+                        <th>Tổng</th>
+                        <th>Xóa</th>
+                    </tr>
+                </thead>
+                <thead>
+                    <tr>
+                        <th><img width="150" height="auto" style="border-radius: 10px; border: 2px solid #FFF;" src="Ảnh/Cam.png"></th>
+                        <th>Cam</th>
+                        <th>2kg</th>
+                        <th>65.000/kg</th>
+                        <th>130.000</th>
+                        <th><button class="checkout">Xóa</button></th>
+                    </tr>
+                </thead>
+                <tbody id="cartTableBody">
+                </tbody>
+            </table>
+
+            <div class="total-price-container">
+                <p>Tổng cộng: <span id="totalPrice">130.000 VND</span></p>
+                <button class="checkout" onclick="checkout()">Đặt hàng</button>
+            </div>
+        </div>
+
+        <div class="checkout-form">
+            <h3>Thông tin giao hàng</h3>
+            <input type="text" placeholder="Họ và tên" required>
+            <input type="text" placeholder="Số điện thoại" required>
+            <input type="email" placeholder="Email" required>
+            <input type="text" placeholder="Địa chỉ nhận hàng" required>
+            <button onclick="placeOrder()">Hoàn tất</button>
+        </div>
+
+        <footer>
+            <p>@Trái cây Việt</p>
+        </footer>
+    </body>
+</html>
