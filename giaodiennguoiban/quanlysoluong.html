@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>traicayviet_quanlysanpham</title>
+    <link rel="stylesheet" href="dinhdang.CSS">
+    <style>
+        table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    font-size: 16px;
+    text-align: center;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+thead {
+    background-color: #fdaaa7;
+    color: white;
+}
+
+thead th {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+tbody td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ffe4e1;
+}
+
+button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #3697d4;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #3697d4;
+}
+    </style>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>TraiCayViet - Trang Chủ</title>
+    <link rel="stylesheet" href="dinhdang.CSS">
+</head>
+<body>
+    <header>
+        <h1>TRÁI CÂY VIỆT</h1>
+        <i style="font-size: 20px;">Trái cây Việt Nam - Tươi ngon - Đa dạng - Giá tốt</i>
+    </header>
+    <nav>
+        <a href="Giao diện người bán\quanlysoluong.html">Quản lý sản phầm</a>
+        <a href="Giao diện người bán\trangdangnhap.html">Đơn hàng</a>
+    </nav>
+    <div>
+        <h1>Quản Lý Sản Phẩm</h1>
+        <form id="addProductForm">
+            <input type="text" id="productName" placeholder="Nhập tên sản phẩm" required>
+            <input type="text" id="productPrice" placeholder="Nhập giá sản phẩm" required>
+            <button type="submit">Thêm</button>
+        </form>
+
+        <form id="editProductForm" style="display: none;">
+            <input type="text" id="editProductName" required>
+            <input type="text" id="editProductPrice" required>
+            <button type="button" onclick="updateProduct()">Sửa</button>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Giá</th>
+                    <th>Sửa</th>
+                    <th>Xóa</th>
+                </tr>
+            </thead>
+            <tbody id="productTableBody">
+
+            </tbody>
+        </table>    
+    </div>
+
+
+    <script>
+        let products = [
+            { name: "Sầu riêng", price: "120.000VNĐ/kg" },
+            { name: "Cam", price: "65.000VNĐ/kg" },
+            { name: "Măng cụt", price: "110.000VNĐ/kg" },
+            { name: "Ổi", price: "30.000VNĐ/kg" },
+            { name: "Mít", price: "45.000VNĐ/kg" },
+            { name: "Táo", price: "110.000VNĐ/kg" },
+            { name: "Bơ", price: "55.000VNĐ/kg" },
+            { name: "Quýt", price: "60.000VNĐ/kg" },
+            { name: "Nhãn", price: "40.000VNĐ/kg" },
+            { name: "Mận", price: "25.000VNĐ/kg" }
+        ];
+
+        let editingIndex = null;
+
+        function displayProducts() {
+            const productTableBody = document.getElementById('productTableBody');
+            productTableBody.innerHTML = '';
+            products.forEach((product, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${product.name}</td>
+                    <td>${product.price}</td>
+                    <td><button onclick="editProduct(${index})">Sửa</button></td>
+                    <td><button onclick="deleteProduct(${index})">Xóa</button></td>
+                `;
+                productTableBody.appendChild(row);
+            });
+        }
+
+        function addProduct(event) {
+            event.preventDefault();
+            const productName = document.getElementById('productName').value.trim();
+            const productPrice = document.getElementById('productPrice').value.trim();
+            if (productName && productPrice) {
+                products.push({ name: productName, price: productPrice });
+                document.getElementById('productName').value = '';
+                document.getElementById('productPrice').value = '';
+                alert("Thêm sản phẩm thành công!");
+                displayProducts();
+            } else {
+                alert("Vui lòng nhập đầy đủ thông tin!");
+            }
+        }
+
+        function editProduct(index) {
+            editingIndex = index;
+            const product = products[index];
+            document.getElementById('editProductForm').style.display = 'block';
+            document.getElementById('editProductName').value = product.name;
+            document.getElementById('editProductPrice').value = product.price;
+        }
+
+        function updateProduct() {
+            const newName = document.getElementById('editProductName').value.trim();
+            const newPrice = document.getElementById('editProductPrice').value.trim();
+            if (newName && newPrice) {
+                products[editingIndex] = { name: newName, price: newPrice };
+                document.getElementById('editProductForm').style.display = 'none';
+                alert("Sửa sản phẩm thành công!");
+                displayProducts();
+            } else {
+                alert("Vui lòng nhập đầy đủ thông tin!");
+            }
+        }
+
+        function deleteProduct(index) {
+            if (confirm("Bạn có chắc muốn xóa sản phẩm này không?")) {
+                products.splice(index, 1);
+                alert("Xóa sản phẩm thành công!");
+                displayProducts();
+            }
+        }
+
+        document.getElementById('addProductForm').addEventListener('submit', addProduct);
+
+        displayProducts();
+    </script>
+</body>
+</html>
